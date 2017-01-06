@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= message
+  h2= error.status
+  h3 不知道跑到哪里去了，我们去外太空找一找吧！
+  pre #{error.stack}
