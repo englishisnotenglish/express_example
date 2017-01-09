@@ -4,11 +4,20 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var router = express.Router();
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var mongoose = require('mongoose');
 
 var app = express();
+
+mongoose.connect('mongodb://localhost/test_demo', function(err){
+  if(!err){
+    console.log('successful');
+  }else {
+    throw err;
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,6 +64,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 app.listen(8080);
 module.exports = app;

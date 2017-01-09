@@ -1,5 +1,16 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+
+
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
+
+var Task = new Schema({
+  task: String
+});
+
+var TaskCollection = mongoose.model('Task', Task);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -20,6 +31,13 @@ router.post('/login', function(req, res, next) {
 
 router.get('/user/:id', function(req, res, next) {
   res.render('index',{title: req.params.id});
+});
+
+router.get('/todoList', function(req, res, next) {
+  console.log('in');
+  TaskCollection.find({}, function(err, todoList){
+    res.render('todoList',{todoList: todoList});
+  });
 });
 
 module.exports = router;
