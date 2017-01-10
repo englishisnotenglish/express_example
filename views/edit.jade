@@ -1,0 +1,8 @@
+h1 Edit task view
+form(method = 'post' action = '/task/' + task.id)
+    p
+        input(name = 'task', type = 'text', value = '#{task.task}')
+    div
+        input(type = 'submit', value = '确认')
+        span &emsp;
+        input(type = 'reset', value = '重置')

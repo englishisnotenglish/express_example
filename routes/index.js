@@ -34,9 +34,32 @@ router.get('/user/:id', function(req, res, next) {
 });
 
 router.get('/todoList', function(req, res, next) {
-  console.log('in');
   TaskCollection.find({}, function(err, todoList){
     res.render('todoList',{todoList: todoList});
+  });
+});
+
+router.get('/createTask', function(req, res){
+  res.render('createTask', {title: 'New Task'});
+});
+
+router.post('/addTask', function(req, res){
+  var task = new TaskCollection(req.body);
+  task.save(function(err){
+    if(!err){
+      res.redirect('todoList');
+    }else {
+      res.redirect('createTask');
+    }
+  });
+});
+
+router.get('/:id/edit', function(req, res){
+  TaskCollection.findById(req.params.id, function(err, todoList){
+    res.render('edit', {
+      title: 'Edit Task',
+      todoList: todoList
+    });
   });
 });
 

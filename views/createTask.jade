@@ -1,0 +1,9 @@
+h2= title
+form(action = '/addTask', method = 'post' enctype = 'application/json')
+    p
+        span Add a task &emsp;
+        input(type = 'text', placeholder = '请输入你想要做的事情', name = 'task' required)
+    div
+        input(value = 'Save', type = 'submit')
+        span &emsp;
+        input(value = 'Cancel', type = 'reset')
