@@ -17,12 +17,17 @@ app.get('/', function(req, res){
   res.sendfile('./views/index.html');
 });
 server.listen(8080);
+var count = 0;
 var socket = io.listen(server);
 socket.on('connection', function(socket){
-  console.log('connect');
-  socket.emit('news', {hello: '你好'});
+  socket.on('message', function(data){
+    console.log(data);
+    socket.broadcast.emit('sendMessage', {message: data})
+  });
+  count++;
   socket.on('disconnect', function(){
-    console.log('User disconnected');
+    count--;
+    socket.broadcast.emit('user', {number: count});
   });
 });
 
