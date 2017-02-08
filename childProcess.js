@@ -1,13 +1,6 @@
 function git (command){
-    var  spwan = require('child_process').spawn;
-    var  ping = spwan('git', [command]);
-    ping.stdout.setEncoding('utf8');
-    ping.stdout.on('data', function(data){
-        console.log(data);
-    });
+    var  spwan = require('child_process').spawnSync;
+    var  ping = spwan('git', command);
+    console.log(ping.stderr.toString('utf-8'));
 }
-git('status');
-git('add .');
-git('commit -m "test script"');
-git('pull');
-git('push');
+git(['push']);
